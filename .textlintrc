@@ -1,0 +1,13 @@
+{
+  "filters": {},
+  "rules": {
+    "preset-ja-technical-writing": {
+      "ja-no-weak-phrase": false,
+      "ja-no-mixed-period": false,
+      "no-exclamation-question-mark": false
+    },
+    "preset-jtf-style": true,
+    "no-dropping-the-ra": true,
+    "no-mix-dearu-desumasu": true
+  }
+}
