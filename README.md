@@ -2,8 +2,14 @@
 日本語の文章をlintしてくれるオレオレ設定
 
 ## 必要なもの
+### 共通
 - nodejsの実行環境
+
+### vim
 - [mattn/efm-langserver](https://github.com/mattn/efm-langserver)
+
+### vscode
+- [vscode-textlint](https://marketplace.visualstudio.com/items?itemName=taichi.vscode-textlint)
 
 ## 設定
 ### textlintもろもろのインストール
