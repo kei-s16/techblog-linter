@@ -2,10 +2,13 @@ on:
   pull_request:
     types: [synchronize]
 
+defaults:
+  run:
+    working-directory: dagger
+
 jobs:
   textlint-ja:
     name: lint documents
-    working-directory: dagger
     runs-on: ubuntu-latest
     steps:
       - name: checkout source
