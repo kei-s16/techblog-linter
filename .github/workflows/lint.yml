@@ -2,9 +2,6 @@ on:
   pull_request:
     types: [synchronize]
 
-defaults:
-  run:
-    working-directory: dagger
 
 jobs:
   textlint-ja:
@@ -19,5 +16,7 @@ jobs:
           go-version: 1.19.3
       - name: go get
         run: go get -v
+        working-directory: ./dagger
       - name: run dagger ci
         run: go run main.go
+        working-directory: ./dagger
