@@ -6,6 +6,7 @@ on:
 
 jobs:
   textlint-ja:
+    name: lint documents
     runs-on: ubuntu-latest
     steps:
       - name: checkout source
