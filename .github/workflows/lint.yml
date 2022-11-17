@@ -5,6 +5,7 @@ on:
 jobs:
   textlint-ja:
     name: lint documents
+    working-directory: dagger
     runs-on: ubuntu-latest
     steps:
       - name: checkout source
@@ -15,7 +16,5 @@ jobs:
           go-version: 1.19.3
       - name: go get
         run: go get -v
-          working-directory: dagger
       - name: run dagger ci
         run: go run main.go
-          working-directory: dagger
