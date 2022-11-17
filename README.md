@@ -4,6 +4,7 @@
 ## 必要なもの
 ### 共通
 - nodejsの実行環境
+- (daggerをローカルで動かす場合)goの実行環境
 
 ### vim
 - [mattn/efm-langserver](https://github.com/mattn/efm-langserver)
