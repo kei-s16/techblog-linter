@@ -41,7 +41,7 @@ func lint(ctx context.Context) error {
 		})
 
 	if _, err := node.ExitCode(ctx); err != nil {
-		panic(err)
+		panic(err) // TODO: panicすべきではなさそうなので、あとで直す
 	}
 
 	return nil
