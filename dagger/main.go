@@ -31,6 +31,21 @@ func lint(ctx context.Context) error {
 	// `node` コンテナの/srcにworkdirをマウントする
 	node = node.WithMountedDirectory("/src", projectRoot).WithWorkdir("/src")
 
+	// `node` コンテナにgitをインストール
+	node = node.
+		Exec(dagger.ContainerExecOpts{
+			Args: []string{"apk", "update"},
+		}).
+		Exec(dagger.ContainerExecOpts{
+			Args: []string{"apk", "add", "git"},
+		})
+		// NOTE: hoge && fuga みたいな書き方をすると、 && より先の処理が走らない？ ので分割している
+	
+	node = node.
+		Exec(dagger.ContainerExecOpts{
+			Args: []string{"git", "diff", "--name-only", "HEAD", "main"},
+		})
+
 	// `node` コンテナ内で必要なnpmパッケージをインストールする
 	node = node.
 		Exec(dagger.ContainerExecOpts{
