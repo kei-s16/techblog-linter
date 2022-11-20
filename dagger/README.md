@@ -19,4 +19,5 @@ $ go run main.go
 
 ## GitHub Actions上での実行
 `{REPO}/.github/workflows`にGitHub Actions上でdaggerによるCIを実行する定義を置いています。  
-デフォルトの発火条件は`on: pull_request`になっています。必要に応じて`path`を指定するなど、追加の設定を行なってください(特に、Privateリポジトリで使用する場合、デフォルトの設定ではActionsの実行時間を消費しすぎてしまう可能性があります)。
+デフォルトの発火条件は`on: pull_request`になっています。必要に応じて`path`を指定するなど、追加の設定を行なってください。  
+特に、Privateリポジトリで使用する場合、デフォルトの設定ではActionsの実行時間を消費しすぎてしまう可能性があります。
