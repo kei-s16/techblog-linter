@@ -26,7 +26,7 @@ func lint(ctx context.Context) error {
 	projectRoot := client.Host().Workdir()
 
 	// `node` コンテナイメージを持ってくる
-	node := client.Container().From("node:18.11.0")
+	node := client.Container().From("node:18.11.0-alpine3.15")
 
 	// `node` コンテナの/srcにworkdirをマウントする
 	node = node.WithMountedDirectory("/src", projectRoot).WithWorkdir("/src")
