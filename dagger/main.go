@@ -31,13 +31,16 @@ func lint(ctx context.Context) error {
 	// `node` コンテナの/srcにworkdirをマウントする
 	node = node.WithMountedDirectory("/src", projectRoot).WithWorkdir("/src")
 
-	// `node` コンテナ内でtextlintにかける
+	// `node` コンテナ内で必要なnpmパッケージをインストールする
 	node = node.
 		Exec(dagger.ContainerExecOpts{
 			Args: []string{"npm", "ci"},
-		}).
+		})
+
+	// `node` コンテナ内でtextlintを流す
+	node = node.
 		Exec(dagger.ContainerExecOpts{
-			Args: []string{"npx", "textlint", "README.md"}, // TODO: とりあえずREADMEにしてるけど、差分あるやつ全部にする
+			Args: []string{"npx", "textlint", "--fix", "--dry-run", "README.md"},
 		})
 
 	if _, err := node.ExitCode(ctx); err != nil {
