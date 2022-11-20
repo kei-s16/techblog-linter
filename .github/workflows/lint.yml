@@ -2,6 +2,7 @@ on:
   pull_request:
     types: [synchronize]
 
+
 jobs:
   textlint-ja:
     name: lint documents
@@ -15,7 +16,7 @@ jobs:
           go-version: 1.19.3
       - name: go get
         run: go get -v
-          working-directory: dagger
+        working-directory: ./dagger
       - name: run dagger ci
         run: go run main.go
-          working-directory: dagger
+        working-directory: ./dagger
