@@ -6,15 +6,23 @@ import (
 	"os"
 
 	"dagger.io/dagger"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	if err := lint(context.Background()); err != nil {
+	err := godotenv.Load()
+		if err != nil {
+		panic("Error loading .env file")
+	}
+
+	linterTargetDir := os.Getenv("LINTER_TARGET_DIR")
+
+	if err := lint(context.Background(), linterTargetDir); err != nil {
 		fmt.Println(err)
 	}
 }
 
-func lint(ctx context.Context) error {
+func lint(ctx context.Context, targetDir string) error {
 	// daggerクライアントの初期化
 	client, err := dagger.Connect(ctx, dagger.WithLogOutput(os.Stdout), dagger.WithWorkdir("../"))
 	if err != nil {
@@ -40,7 +48,7 @@ func lint(ctx context.Context) error {
 	// `node` コンテナ内でtextlintを流す
 	node = node.
 		Exec(dagger.ContainerExecOpts{
-			Args: []string{"npx", "textlint", "--fix", "--dry-run", "README.md"},
+			Args: []string{"npx", "textlint", "--fix", "--dry-run", targetDir},
 		})
 
 	if _, err := node.ExitCode(ctx); err != nil {
