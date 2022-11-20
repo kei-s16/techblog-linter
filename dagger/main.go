@@ -48,12 +48,8 @@ func lint(ctx context.Context, targetDir string) error {
 	// `node` コンテナ内でtextlintを流す
 	node = node.
 		Exec(dagger.ContainerExecOpts{
-			Args: []string{"npx", "textlint", "--fix", "--dry-run", targetDir},
+			Args: []string{"npx", "textlint", targetDir},
 		})
-
-	if _, err := node.ExitCode(ctx); err != nil {
-		panic(err) // TODO: panicすべきではなさそうなので、あとで直す
-	}
 
 	return nil
 }
