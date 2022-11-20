@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	// projectRoot/dagger/.env を読む
 	err := godotenv.Load()
 		if err != nil {
 		panic("Error loading .env file")
