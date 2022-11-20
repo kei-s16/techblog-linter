@@ -1,4 +1,4 @@
-## techblog-linter
+# techblog-linter
 日本語の文章をlintしてくれるオレオレ設定
 
 ## 必要なもの
