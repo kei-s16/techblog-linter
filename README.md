@@ -20,3 +20,8 @@ $ npm ci
 
 ### (vim/neovimのみ)efm-langserverの設定を置く
 `~/.config/efm-langserver/config.yaml` を自分で定義するか、[kei-s16が使っている設定](https://raw.githubusercontent.com/kei-s16/dotfiles/master/.config/efm-langserver/config.yaml)を持ってきてください。
+
+## lintの実行
+```sh
+$ npx textlint {対象ファイルorディレクトリ}
+```
