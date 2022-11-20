@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 
 	"dagger.io/dagger"
@@ -12,14 +11,14 @@ import (
 func main() {
 	// projectRoot/dagger/.env を読む
 	err := godotenv.Load()
-		if err != nil {
+	if err != nil {
 		panic("Error loading .env file")
 	}
 
 	linterTargetDir := os.Getenv("LINTER_TARGET_DIR")
 
 	if err := lint(context.Background(), linterTargetDir); err != nil {
-		fmt.Println(err)
+		os.Exit(1)
 	}
 }
 
@@ -47,10 +46,16 @@ func lint(ctx context.Context, targetDir string) error {
 		})
 
 	// `node` コンテナ内でtextlintを流す
-	node = node.
+	_, err = node.
 		Exec(dagger.ContainerExecOpts{
 			Args: []string{"npx", "textlint", targetDir},
-		})
+		}).
+		ExitCode(ctx)
+
+	// NOTE: ExitCodeが常に0を返してくるので、workaroundでerrの有無で判定する
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
